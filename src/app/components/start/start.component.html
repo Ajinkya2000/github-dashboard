@@ -1,0 +1,22 @@
+<div class="columns is-centered is-vcentered formWrapper">
+  <div class="column is-half box p-6">
+    <h3 class="is-size-3 has-text-weight-medium has-text-info">
+      Github Dashboard
+    </h3>
+    <form class="field mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
+      <label class="label has-text-grey" for="username">Enter Github Username</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          required
+          placeholder="Username"
+        />
+      </div>
+      <input type="submit" value="Submit" class="button is-link mt-4" />
+    </form>
+  </div>
+</div>

@@ -21,11 +21,16 @@ export class GithubService {
     return this.userData;
   }
 
+  errorHandler(error: HttpErrorResponse) {
+    return throwError(error)
+  }
+
   getUser(username: string): Observable<{}> {
     return this.http.get<{}>(`${this.apiUrl}/${username}`).pipe(catchError(this.errorHandler));
   }
 
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error)
+  getUserRepos(username: string): Observable<[]> {
+    return this.http.get<[]>(`${this.apiUrl}/${username}/repos`).pipe(catchError(this.errorHandler));
   }
+
 }

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 // Services
 import { GithubService } from '../../services/github.service';
 
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
@@ -14,6 +16,7 @@ export class StartComponent implements OnInit {
   username: string = '';
   error: string = '';
   loading: boolean = false;
+  faGithub = faGithub
 
   constructor(private _githubService: GithubService, private _router: Router) {}
 
@@ -37,7 +40,7 @@ export class StartComponent implements OnInit {
     this.error = err.error.message;
     this.loading = false;
   }
-  
+
   handleComplete() {
     this.loading = false;
     this.username = '';

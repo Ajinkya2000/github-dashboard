@@ -9,7 +9,6 @@
     white-space: nowrap;
 }
 
-.icons {
-    width: 10px;
-    background: brown;
+.dashboardWrapper {
+    min-height: 100vh;
 }

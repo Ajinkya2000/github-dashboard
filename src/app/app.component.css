@@ -1,4 +1,3 @@
-.startWrapper {
-    height: 100vh;
-    overflow: hidden;
+.appWrapper {
+  min-height: 100vh;
 }

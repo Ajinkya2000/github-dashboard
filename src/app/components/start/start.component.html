@@ -1,10 +1,13 @@
 <div class="columns is-centered is-vcentered formWrapper">
   <div class="column is-half box p-6">
-    <h3 class="is-size-2 has-text-weight-medium has-text-info is-size-4-touch">
-      Github Dashboard
+    <h3 class="is-size-2 has-text-weight-medium has-text-info is-size-5-touch">
+      <app-icons [icon]="faGithub" [size]=4></app-icons>
+      <span class="ml-4"> Github Dashboard </span>
     </h3>
     <form class="field mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
-      <label class="label has-text-grey" for="username">Enter Github Username</label>
+      <label class="label has-text-grey" for="username"
+        >Enter Github Username</label
+      >
       <div class="control">
         <input
           class="input"
@@ -16,8 +19,14 @@
           placeholder="Username"
         />
       </div>
-      <button type="submit" class="button is-link mt-4" [class.is-loading]="loading">Submit</button>
+      <button
+        type="submit"
+        class="button is-link mt-4"
+        [class.is-loading]="loading"
+      >
+        Submit
+      </button>
     </form>
-    <p class="has-text-danger">{{error}}</p>
+    <p class="has-text-danger">{{ error }}</p>
   </div>
 </div>

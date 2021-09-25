@@ -21,14 +21,23 @@ export class DashboardComponent implements OnInit {
   };
   twitterHandle: string = '';
 
+  repos = [];
+
   constructor(private _githubService: GithubService, private _router: Router) {}
 
   ngOnInit(): void {
     this.userData = this._githubService.getUserData();
     if (this.userData === null) {
-      this._router.navigateByUrl('/');
-    }
+      // this._router.navigateByUrl('/');
+    } else {
+      this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
 
-    this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
+      // Get Repos
+      this._githubService
+        .getUserRepos(this.userData.login)
+        .subscribe((data) => {
+          this.repos = data;
+        });
+    }
   }
 }

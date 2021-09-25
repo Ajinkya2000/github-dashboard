@@ -1,34 +1,50 @@
-<div class="columns is-centered mt-6">
-  <div class="is-centered box column is-half columns is-vcentered mx-5 px-5">
-    <div class="column columnLeft is-4">
-      <figure class="image is-128x128 imgWrapper">
-        <img class="is-rounded" [src]="userData.avatar_url" alt="avatar" />
-      </figure>
-      <a
-        class="is-link columns mt-3"
-        target="_blank"
-        rel="=noopener noreferrer"
-        href="{{ userData.html_url }}"
-      >
-        <app-icons [icon]="icons.faLink" [size]="6"></app-icons>
-        <p class="mx-2 is-size-6 githubLink">{{ userData.html_url }}</p>
-      </a>
+<div class="dashboardWrapper container is-fluid">
+  <div class="columns is-centered">
+    <div
+      class="is-centered box column is-half columns is-vcentered mx-5 mt-6 px-5"
+    >
+      <div class="column columnLeft is-4">
+        <figure class="image is-128x128 imgWrapper">
+          <img class="is-rounded" [src]="userData.avatar_url" alt="avatar" />
+        </figure>
+        <a
+          class="is-link columns mt-3"
+          target="_blank"
+          rel="=noopener noreferrer"
+          href="{{ userData.html_url }}"
+        >
+          <app-icons [icon]="icons.faLink" [size]="6"></app-icons>
+          <p class="mx-2 is-size-6 githubLink">{{ userData.html_url }}</p>
+        </a>
+      </div>
+      <div class="column is-vcentered">
+        <h2 class="is-size-3">{{ userData.name }}</h2>
+        <p class="has-text-grey-light">
+          {{ userData.bio || "Bio not provided" }}
+        </p>
+        <p class="my-3">
+          <app-icons [icon]="icons.faMapMarkerAlt" [size]="6"></app-icons>
+          <span>
+            {{ userData.location || "Location not provided" }}
+          </span>
+        </p>
+        <a [href]="twitterHandle" target="_blank" rel="=noopener noreferrer">
+          <app-icons [icon]="icons.faTwitter" [size]="6"></app-icons>
+          <span> Twitter </span>
+        </a>
+      </div>
     </div>
-    <div class="column is-vcentered">
-      <h2 class="is-size-3">{{ userData.name }}</h2>
-      <p class="has-text-grey-light">
-        {{ userData.bio || "Bio not provided" }}
-      </p>
-      <p class="my-3">
-        <app-icons [icon]="icons.faMapMarkerAlt" [size]="6"></app-icons>
-        <span>
-          {{ userData.location || "Location not provided" }}
-        </span>
-      </p>
-      <a [href]="twitterHandle" target="_blank" rel="=noopener noreferrer">
-        <app-icons [icon]="icons.faTwitter" [size]="6"></app-icons>
-        <span> Twitter </span>
-      </a>
+  </div>
+  <h2 class="is-size-2 my-6 has-text-centered">Repositories</h2>
+
+  <div class="cotainer">
+    <div class="columns is-multiline mx-5">
+      <app-repo-detail
+        *ngFor="let repo of repos"
+        class="column is-4 is-centered has-text-centered"
+      ></app-repo-detail>
     </div>
   </div>
 </div>
+
+<!-- <div class="column is-centered is-4 abcd">Hello</div> -->

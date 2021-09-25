@@ -6,14 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./repo-detail.component.css']
 })
 export class RepoDetailComponent implements OnInit {
-  @Input() repoData: [] = [];
-
-  repoName!: string;
+  @Input() repoData: any;
 
   constructor() { 
-    console.log(this.repoData)
   }
-
+  
   ngOnInit(): void {
   }
 

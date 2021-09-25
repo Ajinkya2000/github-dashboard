@@ -4,15 +4,15 @@
       class="card-header-title has-text-info-dark"
       target="_blank"
       rel="noopener noreferrer"
-      href="https://api.github.com/users/Ajinkya2000/repos"
+      [href]="repoData.html_url"
     >
-      Card header
+      {{repoData.name}}
     </a>
   </header>
   <div class="card-content">
-    <div class="content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, dolor.
+    <div class="content" [class.has-text-grey-light]="repoData.description === null">
+      {{repoData.description || 'This repository has no description.'}}
     </div>
   </div>
-  <app-language-tag></app-language-tag>
+  <app-language-tag [tagsUrl]="repoData.languages_url"></app-language-tag>
 </div>

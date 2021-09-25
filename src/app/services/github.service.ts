@@ -22,15 +22,22 @@ export class GithubService {
   }
 
   errorHandler(error: HttpErrorResponse) {
-    return throwError(error)
+    return throwError(error);
   }
 
   getUser(username: string): Observable<{}> {
-    return this.http.get<{}>(`${this.apiUrl}/${username}`).pipe(catchError(this.errorHandler));
+    return this.http
+      .get<{}>(`${this.apiUrl}/${username}`)
+      .pipe(catchError(this.errorHandler));
   }
 
   getUserRepos(username: string): Observable<[]> {
-    return this.http.get<[]>(`${this.apiUrl}/${username}/repos`).pipe(catchError(this.errorHandler));
+    return this.http
+      .get<[]>(`${this.apiUrl}/${username}/repos`)
+      .pipe(catchError(this.errorHandler));
   }
 
+  getRepoLanguages(tagsUrl: string): Observable<{}> {
+    return this.http.get<{}>(tagsUrl);
+  }
 }

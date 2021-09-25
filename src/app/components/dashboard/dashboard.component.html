@@ -42,9 +42,8 @@
       <app-repo-detail
         *ngFor="let repo of repos"
         class="column is-4 is-centered has-text-centered"
+        [repoData] = repo
       ></app-repo-detail>
     </div>
   </div>
 </div>
-
-<!-- <div class="column is-centered is-4 abcd">Hello</div> -->

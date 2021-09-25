@@ -13,12 +13,14 @@ import { GithubService } from '../../services/github.service';
 export class StartComponent implements OnInit {
   username: string = '';
   error: string = '';
+  loading: boolean = false;
 
   constructor(private _githubService: GithubService, private _router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
+    this.loading = true;
     this._githubService.getUser(this.username).subscribe(
       (res) => this.handleResponse(res),
       (err) => this.handleError(err),
@@ -27,16 +29,17 @@ export class StartComponent implements OnInit {
   }
 
   handleResponse(res: {}) {
-    console.log(res);
     this._githubService.setUserData(res);
     this._router.navigateByUrl('/dashboard');
   }
 
   handleError(err: HttpErrorResponse) {
     this.error = err.error.message;
+    this.loading = false;
   }
-
+  
   handleComplete() {
+    this.loading = false;
     this.username = '';
   }
 }

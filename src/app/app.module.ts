@@ -7,9 +7,10 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GithubService } from './services/github.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IconsComponent } from './components/icons/icons.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents],
+  declarations: [AppComponent, routingComponents, IconsComponent],
   imports: [
     BrowserModule,
     FormsModule,

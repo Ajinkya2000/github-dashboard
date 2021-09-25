@@ -1,15 +1,34 @@
-<div class="columns">
-  <div class="column is-half columns box p-6">
-    <div class="column">
+<div class="columns is-centered mt-6">
+  <div class="is-centered box column is-half columns is-vcentered mx-5 px-5">
+    <div class="column columnLeft is-4">
       <figure class="image is-128x128 imgWrapper">
-        <img
-          class="is-rounded"
-          src="https://avatars.githubusercontent.com/u/55014143?v=4"
-          alt="avatar"
-        />
+        <img class="is-rounded" [src]="userData.avatar_url" alt="avatar" />
       </figure>
-      <a class="is-link" href="https://api.github.com/users/Ajinkya2000">Link</a>
+      <a
+        class="is-link columns mt-3"
+        target="_blank"
+        rel="=noopener noreferrer"
+        href="{{ userData.html_url }}"
+      >
+        <app-icons [icon]="icons.faLink" [size]="6"></app-icons>
+        <p class="mx-2 is-size-6 githubLink">{{ userData.html_url }}</p>
+      </a>
     </div>
-    <div class="column"></div>
+    <div class="column is-vcentered">
+      <h2 class="is-size-3">{{ userData.name }}</h2>
+      <p class="has-text-grey-light">
+        {{ userData.bio || "Bio not provided" }}
+      </p>
+      <p class="my-3">
+        <app-icons [icon]="icons.faMapMarkerAlt" [size]="6"></app-icons>
+        <span>
+          {{ userData.location || "Location not provided" }}
+        </span>
+      </p>
+      <a [href]="twitterHandle" target="_blank" rel="=noopener noreferrer">
+        <app-icons [icon]="icons.faTwitter" [size]="6"></app-icons>
+        <span> Twitter </span>
+      </a>
+    </div>
   </div>
 </div>

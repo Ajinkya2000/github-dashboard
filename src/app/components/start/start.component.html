@@ -1,6 +1,6 @@
 <div class="columns is-centered is-vcentered formWrapper">
   <div class="column is-half box p-6">
-    <h3 class="is-size-3 has-text-weight-medium has-text-info">
+    <h3 class="is-size-2 has-text-weight-medium has-text-info is-size-4-touch">
       Github Dashboard
     </h3>
     <form class="field mt-5" ngNativeValidate (ngSubmit)="onSubmit()">
@@ -18,5 +18,6 @@
       </div>
       <input type="submit" value="Submit" class="button is-link mt-4" />
     </form>
+    <p class="has-text-danger">{{error}}</p>
   </div>
 </div>

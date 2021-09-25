@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+// Services
 import { GithubService } from '../../services/github.service';
 
 @Component({
@@ -9,17 +12,31 @@ import { GithubService } from '../../services/github.service';
 })
 export class StartComponent implements OnInit {
   username: string = '';
+  error: string = '';
 
-  constructor(private githubService: GithubService) {}
+  constructor(private _githubService: GithubService, private _router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.username);
-    this.githubService
-      .getUser(this.username)
-      .subscribe((user) => console.log(user));
+    this._githubService.getUser(this.username).subscribe(
+      (res) => this.handleResponse(res),
+      (err) => this.handleError(err),
+      () => this.handleComplete()
+    );
+  }
 
+  handleResponse(res: {}) {
+    console.log(res);
+    this._githubService.setUserData(res);
+    this._router.navigateByUrl('/dashboard');
+  }
+
+  handleError(err: HttpErrorResponse) {
+    this.error = err.error.message;
+  }
+
+  handleComplete() {
     this.username = '';
   }
 }

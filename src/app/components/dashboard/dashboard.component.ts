@@ -8,12 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  private _userData = {};
   constructor(private _githubService: GithubService, private _router: Router) {}
 
   ngOnInit(): void {
-    const userData = this._githubService.getUserData();
-    if (userData === null) {
-      this._router.navigateByUrl('/');
-    }
+    this._userData = this._githubService.getUserData();
+    // if (userData === null) {
+    //   this._router.navigateByUrl('/');
+    // }
   }
+
+  
 }

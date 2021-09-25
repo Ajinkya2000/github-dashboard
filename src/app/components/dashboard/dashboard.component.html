@@ -36,14 +36,15 @@
     </div>
   </div>
   <h2 class="is-size-2 my-6 has-text-centered">Repositories</h2>
-
-  <div class="cotainer">
+  
+  <div class="cotainer pb-6">
     <div class="columns is-multiline mx-5">
-      <app-repo-detail
+        <app-skeleton *ngFor="let item of [].constructor(6)" class="column is-4 is-centered has-text-centered"></app-skeleton>
+      <!-- <app-repo-detail
         *ngFor="let repo of repos"
         class="column is-4 is-centered has-text-centered"
         [repoData] = repo
-      ></app-repo-detail>
+      ></app-repo-detail> -->
     </div>
   </div>
 </div>

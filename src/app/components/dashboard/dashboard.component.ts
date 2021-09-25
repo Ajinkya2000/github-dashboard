@@ -13,14 +13,13 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  userData: any = {};
+  userData: any = null;
   icons = {
     faLink,
     faMapMarkerAlt,
     faTwitter,
   };
   twitterHandle: string = '';
-
   repos = [];
 
   constructor(private _githubService: GithubService, private _router: Router) {}
@@ -28,7 +27,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this._githubService.getUserData();
     if (this.userData === null) {
-      // this._router.navigateByUrl('/');
+      this._router.navigateByUrl('/');
     } else {
       this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
 

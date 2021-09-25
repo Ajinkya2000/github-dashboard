@@ -10,9 +10,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconsComponent } from './components/icons/icons.component';
 import { RepoDetailComponent } from './components/repo-detail/repo-detail.component';
 import { LanguageTagComponent } from './components/repo-detail/language-tag/language-tag.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, IconsComponent, RepoDetailComponent, LanguageTagComponent],
+  declarations: [AppComponent, routingComponents, IconsComponent, RepoDetailComponent, LanguageTagComponent, SkeletonComponent],
   imports: [
     BrowserModule,
     FormsModule,

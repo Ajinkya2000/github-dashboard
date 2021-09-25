@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -8,12 +11,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class GithubService {
-  private apiUrl = `http://api.github.com/users`;
-  private config = {
-    client_id: environment.clientID,
-    client_secret: environment.clientSecret,
-  };
-
   public userData: any = null;
 
   constructor(private http: HttpClient) {}
@@ -31,22 +28,19 @@ export class GithubService {
   }
 
   getUser(username: string): Observable<{}> {
-    const uri = `${this.apiUrl}/${username}`;
+    const url = `${environment.baseURL}/user/${username}`;
+    return this.http.get<{}>(url).pipe(catchError(this.errorHandler));
+  }
+
+  getUserRepos(username: string, sort: string, limit: number): Observable<any> {
+    const url = `${environment.baseURL}/repos`;
     return this.http
-      .get<{}>(uri, {
-        params: this.config,
-      })
+      .post<any>(url, { sort, limit, username }, { observe: 'response' })
       .pipe(catchError(this.errorHandler));
   }
 
-  getUserRepos(username: string): Observable<[]> {
-    const uri = `${this.apiUrl}/${username}/repos`;
-    return this.http
-      .get<[]>(uri, { params: this.config })
-      .pipe(catchError(this.errorHandler));
-  }
-
-  getRepoLanguages(tagsUrl: string): Observable<{}> {
-    return this.http.get<{}>(tagsUrl, { params: this.config });
+  getRepoLanguages(tagsUrl: string): Observable<any> {
+    const url = `${environment.baseURL}/tags`;
+    return this.http.post<any>(url, { tagsUrl });
   }
 }

@@ -35,16 +35,42 @@
       </div>
     </div>
   </div>
-  <h2 class="is-size-2 my-6 has-text-centered">Repositories</h2>
-  
+
+  <div class="container is-fluid is-vcentered columns my-6">
+    <h2 class="column is-size-2">Repositories</h2>
+    <div class="columns column is-size-5 has-text-right">
+      <div class="column">
+        <span>Filter: </span>
+        <select name="sort" id="sort" [(ngModel)]="selectedValue">
+          <option [value]="'desc'" [defaultSelected]>Newest First</option>
+          <option [value]="'asc'">Oldest First</option>
+        </select>
+        <select
+          name="numberOfRepos"
+          id="numberOfRepos"
+          [(ngModel)]="limit"
+        >
+          <option [value]="10" [defaultSelected]>10 / page</option>
+          <option [value]="50">50 / page</option>
+          <option [value]="100">100 / page</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <div class="cotainer pb-6">
-    <div class="columns is-multiline mx-5">
-        <app-skeleton *ngFor="let item of [].constructor(6)" class="column is-4 is-centered has-text-centered"></app-skeleton>
-      <!-- <app-repo-detail
+    <div *ngIf="!loadingRepos" class="columns is-vcentered is-multiline mx-5">
+      <app-skeleton
+        *ngFor="let item of [].constructor(6)"
+        class="column is-4 is-centered has-text-centered"
+      ></app-skeleton>
+    </div>
+    <div *ngIf="loadingRepos" class="columns is-vcentered is-multiline mx-5">
+      <app-repo-detail
         *ngFor="let repo of repos"
         class="column is-4 is-centered has-text-centered"
-        [repoData] = repo
-      ></app-repo-detail> -->
+        [repoData]="repo"
+      ></app-repo-detail>
     </div>
   </div>
 </div>

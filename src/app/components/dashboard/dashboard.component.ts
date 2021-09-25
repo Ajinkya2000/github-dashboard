@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -12,7 +12,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnChanges {
   userData: any = null;
   icons = {
     faLink,
@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
   };
   twitterHandle: string = '';
   repos = [];
+  loadingRepos: boolean = false;
+  selectedValue: string = 'desc';
+  limit: number= 10;
 
   constructor(private _githubService: GithubService, private _router: Router) {}
 
@@ -33,10 +36,15 @@ export class DashboardComponent implements OnInit {
 
       // Get Repos
       this._githubService
-        .getUserRepos(this.userData.login)
+        .getUserRepos(this.userData.login, this.selectedValue, this.limit)
         .subscribe((data) => {
           this.repos = data;
+          this.loadingRepos = true;
         });
     }
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    console.log(change)
   }
 }

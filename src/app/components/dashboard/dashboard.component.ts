@@ -63,6 +63,7 @@ export class DashboardComponent implements OnInit {
   onLimitChange(value: number) {
     this.loadingRepos = false;
     this.limit = value;
+    this.currentPage = 1;
     this.getRepos();
   }
 

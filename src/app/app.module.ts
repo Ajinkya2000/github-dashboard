@@ -11,9 +11,10 @@ import { IconsComponent } from './components/icons/icons.component';
 import { RepoDetailComponent } from './components/repo-detail/repo-detail.component';
 import { LanguageTagComponent } from './components/repo-detail/language-tag/language-tag.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
-  declarations: [AppComponent, routingComponents, IconsComponent, RepoDetailComponent, LanguageTagComponent, SkeletonComponent],
+  declarations: [AppComponent, routingComponents, IconsComponent, RepoDetailComponent, LanguageTagComponent, SkeletonComponent, PaginationComponent],
   imports: [
     BrowserModule,
     FormsModule,

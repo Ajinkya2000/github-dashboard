@@ -41,7 +41,12 @@
     <div class="columns column is-size-5 has-text-right">
       <div class="column">
         <span>Filter: </span>
-        <select name="sort" id="sort" [ngModel]="selectedValue" (ngModelChange)="onSelectedValueChange($event)">
+        <select
+          name="sort"
+          id="sort"
+          [ngModel]="selectedValue"
+          (ngModelChange)="onSelectedValueChange($event)"
+        >
           <option [value]="'desc'" [defaultSelected]>Newest First</option>
           <option [value]="'asc'">Oldest First</option>
         </select>
@@ -66,7 +71,7 @@
         class="column is-4 is-centered has-text-centered"
       ></app-skeleton>
     </div>
-    <div *ngIf="loadingRepos" class="columns is-vcentered is-multiline mx-5">
+    <div *ngIf="loadingRepos" class="columns is-desktop is-multiline mx-5">
       <app-repo-detail
         *ngFor="let repo of repos"
         class="column is-4 is-centered has-text-centered"
@@ -75,3 +80,9 @@
     </div>
   </div>
 </div>
+
+<app-pagination
+  [currentPage]="currentPage"
+  [pageData]="pageData"
+  (goToNext)="getNextPage($event)"
+></app-pagination>

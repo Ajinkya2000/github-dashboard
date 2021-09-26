@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -21,8 +21,8 @@ export class DashboardComponent implements OnInit {
   };
   twitterHandle: string = '';
   repos = [];
-  nextPage: any;
-  lastPage: any;
+  currentPage: number = 1;
+  pageData = {}
   loadingRepos: boolean = false;
   selectedValue: string = 'desc';
   limit: number = 10;
@@ -31,11 +31,10 @@ export class DashboardComponent implements OnInit {
 
   getRepos() {
     this._githubService
-      .getUserRepos(this.userData.login, this.selectedValue, this.limit)
-      .subscribe(({ body }) => {
-        this.repos = body.data;
-        this.nextPage = body.nextPage;
-        this.lastPage = body.lastPage;
+      .getUserRepos(this.userData.login, this.selectedValue, this.limit, this.currentPage)
+      .subscribe(({ body: {data, ...pageData} }) => {
+        this.repos = data;
+        this.pageData = pageData
         this.loadingRepos = true;
       });
   }
@@ -43,7 +42,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this._githubService.getUserData();
     if (this.userData === null) {
-      this._router.navigateByUrl('/');
+      // this._router.navigateByUrl('/');
     } else {
       this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
       this.getRepos();
@@ -51,7 +50,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onSelectedValueChange(value: string) {
-    console.log(value)
     this.loadingRepos = false;
     this.selectedValue = value;
     this.getRepos();
@@ -60,6 +58,11 @@ export class DashboardComponent implements OnInit {
   onLimitChange(value: number) {
     this.loadingRepos = false;
     this.limit = value;
+    this.getRepos();
+  }
+
+  getNextPage(page: number) {
+    this.currentPage = page;
     this.getRepos();
   }
 }

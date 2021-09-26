@@ -32,10 +32,10 @@ export class GithubService {
     return this.http.get<{}>(url).pipe(catchError(this.errorHandler));
   }
 
-  getUserRepos(username: string, direction: string, limit: number): Observable<any> {
+  getUserRepos(username: string, direction: string, limit: any, page: any): Observable<any> {
     const url = `${environment.baseURL}/repos`;
     return this.http
-      .post<any>(url, { direction, limit, username }, { observe: 'response' })
+      .post<any>(url, { direction, limit, username, page}, { observe: 'response' })
       .pipe(catchError(this.errorHandler));
   }
 

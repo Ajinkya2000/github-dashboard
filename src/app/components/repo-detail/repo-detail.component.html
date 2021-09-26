@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card hasEqualHeight">
   <header class="card-header">
     <a
       class="card-header-title has-text-info-dark"
@@ -14,5 +14,5 @@
       {{repoData.description || 'This repository has no description.'}}
     </div>
   </div>
-  <app-language-tag [tagsUrl]="repoData.languages_url"></app-language-tag>
+  <app-language-tag class="content mb-4" [tagsUrl]="repoData.languages_url"></app-language-tag>
 </div>

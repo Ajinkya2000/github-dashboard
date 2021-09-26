@@ -24,7 +24,9 @@ describe('StartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('check before submitting', () => {
-  //   component.username
-  // })
+  it('check before submitting', () => {
+    component.username = 'test';
+    component.onSubmit();
+    expect(component.error).toBeFalsy()
+  })
 });

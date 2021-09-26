@@ -84,5 +84,6 @@
 <app-pagination
   [currentPage]="currentPage"
   [pageData]="pageData"
-  (goToNext)="getNextPage($event)"
+  [loadingRepos]="loadingRepos"
+  (changeCurrentPage)="renderNewPage($event)"
 ></app-pagination>

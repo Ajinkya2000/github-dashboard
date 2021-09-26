@@ -65,4 +65,10 @@ export class DashboardComponent implements OnInit {
     this.currentPage = page;
     this.getRepos();
   }
+
+  renderNewPage(page: number) {
+    this.loadingRepos = false;
+    this.currentPage = page;
+    this.getRepos();
+  }
 }

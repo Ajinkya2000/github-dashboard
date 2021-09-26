@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LanguageTagComponent } from './language-tag.component';
 
 describe('LanguageTagComponent', () => {
@@ -8,9 +8,9 @@ describe('LanguageTagComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LanguageTagComponent ]
-    })
-    .compileComponents();
+      declarations: [LanguageTagComponent],
+      imports: [HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

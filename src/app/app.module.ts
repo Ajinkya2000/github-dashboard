@@ -12,6 +12,7 @@ import { RepoDetailComponent } from './components/repo-detail/repo-detail.compon
 import { LanguageTagComponent } from './components/repo-detail/language-tag/language-tag.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, routingComponents, IconsComponent, RepoDetailComponent, LanguageTagComponent, SkeletonComponent, PaginationComponent],
@@ -21,6 +22,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     HttpClientModule,
     AppRoutingModule,
     FontAwesomeModule,
+    RouterModule
   ],
   providers: [GithubService],
   bootstrap: [AppComponent],

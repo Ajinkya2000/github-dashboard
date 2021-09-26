@@ -41,14 +41,15 @@
     <div class="columns column is-size-5 has-text-right">
       <div class="column">
         <span>Filter: </span>
-        <select name="sort" id="sort" [(ngModel)]="selectedValue">
+        <select name="sort" id="sort" [ngModel]="selectedValue" (ngModelChange)="onSelectedValueChange($event)">
           <option [value]="'desc'" [defaultSelected]>Newest First</option>
           <option [value]="'asc'">Oldest First</option>
         </select>
         <select
           name="numberOfRepos"
           id="numberOfRepos"
-          [(ngModel)]="limit"
+          [ngModel]="limit"
+          (ngModelChange)="onLimitChange($event)"
         >
           <option [value]="10" [defaultSelected]>10 / page</option>
           <option [value]="50">50 / page</option>

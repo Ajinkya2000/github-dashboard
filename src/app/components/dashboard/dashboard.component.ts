@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -12,7 +12,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit, OnChanges {
+export class DashboardComponent implements OnInit {
   userData: any = null;
   icons = {
     faLink,
@@ -21,11 +21,24 @@ export class DashboardComponent implements OnInit, OnChanges {
   };
   twitterHandle: string = '';
   repos = [];
+  nextPage: any;
+  lastPage: any;
   loadingRepos: boolean = false;
   selectedValue: string = 'desc';
-  limit: number= 10;
+  limit: number = 10;
 
   constructor(private _githubService: GithubService, private _router: Router) {}
+
+  getRepos() {
+    this._githubService
+      .getUserRepos(this.userData.login, this.selectedValue, this.limit)
+      .subscribe(({ body }) => {
+        this.repos = body.data;
+        this.nextPage = body.nextPage;
+        this.lastPage = body.lastPage;
+        this.loadingRepos = true;
+      });
+  }
 
   ngOnInit(): void {
     this.userData = this._githubService.getUserData();
@@ -33,18 +46,20 @@ export class DashboardComponent implements OnInit, OnChanges {
       this._router.navigateByUrl('/');
     } else {
       this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
-
-      // Get Repos
-      this._githubService
-        .getUserRepos(this.userData.login, this.selectedValue, this.limit)
-        .subscribe((data) => {
-          this.repos = data;
-          this.loadingRepos = true;
-        });
+      this.getRepos();
     }
   }
 
-  ngOnChanges(change: SimpleChanges) {
-    console.log(change)
+  onSelectedValueChange(value: string) {
+    console.log(value)
+    this.loadingRepos = false;
+    this.selectedValue = value;
+    this.getRepos();
+  }
+
+  onLimitChange(value: number) {
+    this.loadingRepos = false;
+    this.limit = value;
+    this.getRepos();
   }
 }

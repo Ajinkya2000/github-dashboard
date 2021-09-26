@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   twitterHandle: string = '';
   repos = [];
   currentPage: number = 1;
-  pageData = {}
+  pageData = {};
   loadingRepos: boolean = false;
   selectedValue: string = 'desc';
   limit: number = 10;
@@ -31,10 +31,15 @@ export class DashboardComponent implements OnInit {
 
   getRepos() {
     this._githubService
-      .getUserRepos(this.userData.login, this.selectedValue, this.limit, this.currentPage)
-      .subscribe(({ body: {data, ...pageData} }) => {
+      .getUserRepos(
+        this.userData.login,
+        this.selectedValue,
+        this.limit,
+        this.currentPage
+      )
+      .subscribe(({ body: { data, ...pageData } }) => {
         this.repos = data;
-        this.pageData = pageData
+        this.pageData = pageData;
         this.loadingRepos = true;
       });
   }
@@ -42,7 +47,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this._githubService.getUserData();
     if (this.userData === null) {
-      // this._router.navigateByUrl('/');
+      this._router.navigateByUrl('/');
     } else {
       this.twitterHandle = `https://twitter.com/${this.userData.twitter_username}`;
       this.getRepos();

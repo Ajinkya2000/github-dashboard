@@ -1,9 +1,22 @@
+.userWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .imgWrapper {
   border-radius: 50%;
   border: 2px solid black;
 }
 
 .githubLink {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.githubLink p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -13,9 +26,18 @@
   min-height: 100vh;
 }
 
+.socialWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 select {
   border: none;
   outline: none;
-  padding: 0.5rem 1rem;
-  margin: 0 1rem;
+}
+
+.selectWrapper {
+  display: flex;
+  justify-content: flex-end;
 }

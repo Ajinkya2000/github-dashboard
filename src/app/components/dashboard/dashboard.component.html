@@ -1,65 +1,85 @@
-<div class="dashboardWrapper container is-fluid">
-  <div class="columns is-centered">
-    <div
-      class="is-centered box column is-half columns is-vcentered mx-5 mt-6 px-5"
-    >
-      <div class="column columnLeft is-4">
+<div *ngIf="userData !== null" class="dashboardWrapper container is-fluid">
+  <div class="columns is-centered pt-6">
+    <div class="is-centered box column is-half columns is-vcentered mx-1 px-5">
+      <div class="column is-4 userWrapper">
         <figure class="image is-128x128 imgWrapper">
           <img class="is-rounded" [src]="userData.avatar_url" alt="avatar" />
         </figure>
         <a
-          class="is-link columns mt-3"
+          class="is-link columns mt-3 is-gapless githubLink"
           target="_blank"
           rel="=noopener noreferrer"
           href="{{ userData.html_url }}"
         >
-          <app-icons [icon]="icons.faLink" [size]="6"></app-icons>
-          <p class="mx-2 is-size-6 githubLink">{{ userData.html_url }}</p>
+          <app-icons [icon]="icons.faLink"></app-icons>
+          <p class="mx-2 is-size-6">{{ userData.html_url }}</p>
         </a>
       </div>
       <div class="column is-vcentered">
-        <h2 class="is-size-3">{{ userData.name }}</h2>
-        <p class="has-text-grey-light">
+        <h2 class="is-size-3 is-size-4-touch has-text-centered-touch">
+          {{ userData.name }}
+        </h2>
+        <p class="has-text-grey-light has-text-centered-touch is-size-7-touch">
           {{ userData.bio || "Bio not provided" }}
         </p>
-        <p class="my-3">
-          <app-icons [icon]="icons.faMapMarkerAlt" [size]="6"></app-icons>
-          <span>
-            {{ userData.location || "Location not provided" }}
-          </span>
-        </p>
-        <a [href]="twitterHandle" target="_blank" rel="=noopener noreferrer">
-          <app-icons [icon]="icons.faTwitter" [size]="6"></app-icons>
-          <span> Twitter </span>
-        </a>
+
+        <div
+          class="
+            columns
+            is-vcentered
+            mt-2
+            socialWrapper
+            has-text-centered-touch
+          "
+        >
+          <p class="column">
+            <app-icons [icon]="icons.faMapMarkerAlt"></app-icons>
+            <span>
+              {{ userData.location || "Location not provided" }}
+            </span>
+          </p>
+          <a
+            class="column"
+            [href]="twitterHandle"
+            target="_blank"
+            rel="=noopener noreferrer"
+          >
+            <app-icons [icon]="icons.faTwitter"></app-icons>
+            <span> Twitter </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="container is-fluid is-vcentered columns my-6">
-    <h2 class="column is-size-2">Repositories</h2>
-    <div class="columns column is-size-5 has-text-right">
-      <div class="column">
-        <span>Filter: </span>
-        <select
-          name="sort"
-          id="sort"
-          [ngModel]="selectedValue"
-          (ngModelChange)="onSelectedValueChange($event)"
-        >
-          <option [value]="'desc'" [defaultSelected]>Newest First</option>
-          <option [value]="'asc'">Oldest First</option>
-        </select>
-        <select
-          name="numberOfRepos"
-          id="numberOfRepos"
-          [ngModel]="limit"
-          (ngModelChange)="onLimitChange($event)"
-        >
-          <option [value]="10" [defaultSelected]>10 / page</option>
-          <option [value]="50">50 / page</option>
-          <option [value]="100">100 / page</option>
-        </select>
+  <div class="container">
+    <div class="is-vcentered is-centered columns my-6">
+      <h2 class="column is-size-2 has-text-centered-touch">Repositories</h2>
+      <div class="columns column is-size-5 has-text-right">
+        <div class="columns column is-vcentered selectWrapper">
+          <p class="column is-2 has-text-centered">Filter:</p>
+          <select
+            class="column is-3 mr-2"
+            name="sort"
+            id="sort"
+            [ngModel]="selectedValue"
+            (ngModelChange)="onSelectedValueChange($event)"
+          >
+            <option [value]="'desc'" [defaultSelected]>Newest First</option>
+            <option [value]="'asc'">Oldest First</option>
+          </select>
+          <select
+            class="column is-3"
+            name="numberOfRepos"
+            id="numberOfRepos"
+            [ngModel]="limit"
+            (ngModelChange)="onLimitChange($event)"
+          >
+            <option [value]="10" [defaultSelected]>10 / page</option>
+            <option [value]="50">50 / page</option>
+            <option [value]="100">100 / page</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>

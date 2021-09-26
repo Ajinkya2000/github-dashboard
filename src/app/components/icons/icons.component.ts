@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'app-icons',
   template: `
   <span>
-    <fa-icon [icon]="icon" class="'is-size-'+ size"></fa-icon>
+    <fa-icon [icon]="icon"></fa-icon>
 </span>
   `,
   styles: [
@@ -13,7 +13,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class IconsComponent implements OnInit {
   @Input() icon: any;
-  @Input() size: number = 6;
 
   constructor() { }
 

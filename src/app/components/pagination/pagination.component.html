@@ -1,35 +1,55 @@
-<div *ngIf="loadingRepos" class="container pb-6">
-  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-    <button class="pagination-previous" [disabled]="pageData.first === null" (click)="pageChange('prev')">
-      Previous
-    </button>
-    <button class="pagination-next" [disabled]="pageData.last === null" (click)="pageChange('next')">
-      Next page
-    </button>
-    <ul class="pagination-list">
-      <li *ngIf="pageData.first !== null">
-        <button class="pagination-link" (click)="pageChange('first')">
-          {{ pageData.first.page }}
-        </button>
-      </li>
-      <li *ngIf="pageData.first !== null">
-        <span class="pagination-ellipsis">&hellip;</span>
-      </li>
-      <li *ngIf="pageData.prev !== null">
-        <button class="pagination-link" (click)="pageChange('prev')">{{ pageData.prev.page }}</button>
-      </li>
-      <li>
-        <a class="pagination-link is-current">{{ currentPage }}</a>
-      </li>
-      <li *ngIf="pageData.next !== null">
-        <button class="pagination-link" (click)="pageChange('next')">{{ pageData.next.page }}</button>
-      </li>
-      <li *ngIf="pageData.last !== null">
-        <span class="pagination-ellipsis">&hellip;</span>
-      </li>
-      <li *ngIf="pageData.last !== null">
-        <button class="pagination-link" (click)="pageChange('last')">{{ pageData.last.page }}</button>
-      </li>
-    </ul>
-  </nav>
+<div class="container">
+  <div *ngIf="loadingRepos" class="pb-6 mx-5">
+    <nav
+      class="pagination is-centered"
+      role="navigation"
+      aria-label="pagination"
+    >
+      <button
+        class="pagination-previous"
+        [disabled]="pageData.first === null"
+        (click)="pageChange('prev')"
+      >
+        Previous
+      </button>
+      <button
+        class="pagination-next"
+        [disabled]="pageData.last === null"
+        (click)="pageChange('next')"
+      >
+        Next page
+      </button>
+      <ul class="pagination-list">
+        <li *ngIf="pageData.first !== null">
+          <button class="pagination-link" (click)="pageChange('first')">
+            {{ pageData.first.page }}
+          </button>
+        </li>
+        <li *ngIf="pageData.first !== null">
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li *ngIf="pageData.prev !== null">
+          <button class="pagination-link" (click)="pageChange('prev')">
+            {{ pageData.prev.page }}
+          </button>
+        </li>
+        <li>
+          <a class="pagination-link is-current">{{ currentPage }}</a>
+        </li>
+        <li *ngIf="pageData.next !== null">
+          <button class="pagination-link" (click)="pageChange('next')">
+            {{ pageData.next.page }}
+          </button>
+        </li>
+        <li *ngIf="pageData.last !== null">
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        <li *ngIf="pageData.last !== null">
+          <button class="pagination-link" (click)="pageChange('last')">
+            {{ pageData.last.page }}
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>

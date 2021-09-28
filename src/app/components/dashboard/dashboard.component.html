@@ -55,11 +55,21 @@
   <div class="container">
     <div class="is-vcentered is-centered columns my-6">
       <h2 class="column is-size-2 has-text-centered-touch">Repositories</h2>
-      <div class="columns column is-size-5 has-text-right">
-        <div class="columns column is-vcentered selectWrapper">
-          <p class="column is-2 has-text-centered">Filter:</p>
+      <div class="column">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <input [ngModel]="searchTerm" (ngModelChange)="checkSearch($event)" class="input" type="text" placeholder="Find a repository" />
+          </p>
+          <p class="control">
+            <button class="button is-info" (click)="filterRepo()"> Search </button>
+          </p>
+        </div>
+      </div>
+      <div class="columns column is-size-5">
+        <div class="columns column is-vcentered is-centered selectWrapper">
+          <p class="column has-text-right-desktop is-2-touch">Filter:</p>
           <select
-            class="column is-3 mr-2"
+            class="column mr-2"
             name="sort"
             id="sort"
             [ngModel]="selectedValue"
@@ -69,7 +79,7 @@
             <option [value]="'asc'">Oldest First</option>
           </select>
           <select
-            class="column is-3"
+            class="column"
             name="numberOfRepos"
             id="numberOfRepos"
             [ngModel]="limit"

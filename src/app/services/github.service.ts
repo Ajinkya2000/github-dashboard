@@ -32,7 +32,7 @@ export class GithubService {
     return this.http.get<{}>(url).pipe(catchError(this.errorHandler));
   }
 
-  getUserRepos(username: string, direction: string, limit: any, page: any): Observable<any> {
+  getUserRepos(username: string, direction: string, limit: number, page: number): Observable<any> {
     const url = `${environment.baseURL}/repos`;
     return this.http
       .post<any>(url, { direction, limit, username, page}, { observe: 'response' })
@@ -42,5 +42,11 @@ export class GithubService {
   getRepoLanguages(tagsUrl: string): Observable<any> {
     const url = `${environment.baseURL}/tags`;
     return this.http.post<any>(url, { tagsUrl });
+  }
+
+  getSearchRepos(term: string, username: string, direction: string, limit: number, page: number): Observable<any> {
+    const url = `${environment.baseURL}/search`;
+    const params = {term, username, direction, limit, page};
+    return this.http.post(url, params);
   }
 }

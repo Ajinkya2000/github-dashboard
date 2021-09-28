@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Types
+import { repoType } from '../../../types/repoType';
+
 // Services
 import { GithubService } from 'src/app/services/github.service';
 
@@ -20,12 +23,13 @@ export class DashboardComponent implements OnInit {
     faTwitter,
   };
   twitterHandle: string = '';
-  repos = [];
+  repos: Partial<repoType[]> = [];
   currentPage: number = 1;
   pageData = {};
   loadingRepos: boolean = false;
   selectedValue: string = 'desc';
   limit: number = 10;
+  searchTerm: string = '';
 
   constructor(private _githubService: GithubService, private _router: Router) {}
 
@@ -42,6 +46,22 @@ export class DashboardComponent implements OnInit {
         this.pageData = pageData;
         this.loadingRepos = true;
       });
+  }
+
+  getSearchRepos() {
+    this._githubService
+      .getSearchRepos(
+        this.searchTerm,
+        this.userData.login,
+        this.selectedValue,
+        this.limit,
+        this.currentPage
+      )
+      .subscribe(({data, ...pageData}) => {
+        this.repos = data;
+        this.pageData = pageData;
+        this.loadingRepos = true;
+      }); 
   }
 
   ngOnInit(): void {
@@ -76,5 +96,21 @@ export class DashboardComponent implements OnInit {
     this.loadingRepos = false;
     this.currentPage = page;
     this.getRepos();
+  }
+
+  checkSearch(term: string) {
+    if (term !== "") {
+      this.searchTerm = term;
+    } else {
+      this.loadingRepos = false;
+      this.getRepos();
+    }
+  }
+
+  filterRepo() {
+    if (this.searchTerm !== "") {
+      this.loadingRepos = false;
+      this.getSearchRepos();
+    }
   }
 }

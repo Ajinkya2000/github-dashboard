@@ -110,6 +110,7 @@ export class DashboardComponent implements OnInit {
   filterRepo() {
     if (this.searchTerm !== "") {
       this.loadingRepos = false;
+      this.currentPage = 1;
       this.getSearchRepos();
     }
   }

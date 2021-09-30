@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class GithubService {
-  public userData: any = null;
+  userData: any = null;
 
   constructor(private http: HttpClient) {}
 
@@ -27,9 +27,9 @@ export class GithubService {
     return throwError(error);
   }
 
-  getUser(username: string): Observable<{}> {
+  getUser(username: string): Observable<any> {
     const url = `${environment.baseURL}/user/${username}`;
-    return this.http.get<{}>(url).pipe(catchError(this.errorHandler));
+    return this.http.get<any>(url).pipe(catchError(this.errorHandler));
   }
 
   getUserRepos(username: string, direction: string, limit: number, page: number): Observable<any> {
